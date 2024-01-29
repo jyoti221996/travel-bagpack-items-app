@@ -1,0 +1,92 @@
+<!--///// Task 3: Make a travel list with their quntity which shows important items first on click of checkbox /////-->
+
+<div class="travel-bg">
+    <div class="travel">
+        <div class="travel_title">
+            <div class="title">
+                <h1>Far Away </h1>
+                <p class="p-tag">Travel far, travel wide, but always travel light</p>
+            </div>
+        </div>
+        <div class="travel_list">
+            
+            <div class="for-padding">
+                <div class="bottom">
+                    <h5 class="item_what" for="item">What do you need for your trip?:</h5>
+                    <div class="form">                        
+                        <div class="add_div">
+                            <div class="what" [ngClass]="errorInput ? 'what_error' : ''">                                
+                                <div>
+                                    <input type="text" [(ngModel)]="itemName" name="item" placeholder="Item name" (keyup.enter)="addItem()">
+                                </div>
+                                <div class="qty">
+                                    <select [(ngModel)]="selectedNumber" (keyup.enter)="addItem()" placeholder="Quantity">
+                                        <option *ngFor="let number of numbers" [value]="number">{{ number }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btns">
+                                <!-- (click)="saveLocal_()" -->
+                                <button type="submit" *ngIf="!updateBtn" (click)="addItem()" class=""> ADD</button>
+                                <button type="submit" *ngIf="updateBtn" class="" (click)="update()"> Update</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="error" *ngIf="errorInput">{{errorMsg}}</div>
+                </div>
+
+                <div class="item-list">
+                    <div class="filter-clear">
+                        <div class="filter">
+                            <div for="quantity" class="filter_title">Filter:</div>
+                            <select [(ngModel)]="sortOrder" (change)="sortItems($event)" placeholder="Select">
+                                <option *ngFor="let item of dropdownItem" [value]="item">{{item}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button class="clear" (click)="deleteAll()">Clear List</button>
+                        </div>
+                    </div>
+
+                    <div class="listHeight custom_scroll">
+                        <ul>
+                            <li *ngFor="let item of travelItems; let i = index"
+                                >
+                                <div class="list_item" [ngClass]="item.isChecked ? 'bg-change' : 'bg_list'">
+                                    <div class="item-name">
+                                        <input type="checkbox" [(ngModel)]="item.isChecked" (change)="onCheckBox(i)">
+                                        <span>{{ item.name }}</span>
+                                    </div>
+                                    <span>{{ item.quantity }}</span>
+                                </div>
+                                <div class="quantity">  
+                                    <div class="delete">
+                                        <button (click)="editItem(item,i)"><i class="fa fa-pen"
+                                                aria-hidden="true"></i></button>
+                                    </div>                                  
+                                    <div class="delete">
+                                        <button (click)="removeItem(i)"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></button>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title_footer_count" *ngIf="!fullList">
+                <h5 class="footer_h5">You have {{listCount}} items on your list, and you already packed {{noChcek}}
+                    ({{progress}}%)</h5>
+            </div>
+            <div class="title_footer" *ngIf="fullList" [ngClass]="!btnHide ? 'message_center':'title_footer'">
+                <h4>{{message}}</h4>
+                <div class="btns" *ngIf="btnHide">
+                    <button (click)="okButton()" class="ok_btn">Ok</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
