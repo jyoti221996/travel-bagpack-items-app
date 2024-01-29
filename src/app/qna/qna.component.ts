@@ -7,20 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./qna.component.css']
 })
 export class QnaComponent implements OnInit {
-
-
   // Task 3
-
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.getLocal();
-    this.allinOne();    
-  }
-
-
-  //// Task 3: Make a travel list with their quntity which shows important items first on click of checkbox ////
 
   travelItems: { name: string, quantity: number, isChecked: boolean }[] = [];
   checkItem: any = [];
@@ -43,6 +30,17 @@ export class QnaComponent implements OnInit {
   btnHide: boolean = false;  
   selectedArrayIndex: any = undefined;
   updateBtn:boolean = false;
+
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.getLocal();
+    this.allinOne();    
+  }
+
+
+  //// Task 3: Make a travel list with their quntity which shows important items first on click of checkbox ////
 
   addItem() {
     this.newItem = {
@@ -159,8 +157,7 @@ export class QnaComponent implements OnInit {
     this.fullList = false;
   }
 
-  editItem(dataItem: any, idx: number) {
-    
+  editItem(dataItem: any, idx: number) {    
     this.selectedArrayIndex = idx;
     this.itemName = dataItem.name;
     this.selectedNumber = dataItem.quantity;  
@@ -168,8 +165,7 @@ export class QnaComponent implements OnInit {
     this.updateBtn = true;
   }
 
-  update() {
-    
+  update() {   
     this.travelItems[this.selectedArrayIndex] = {name : this.itemName , quantity: this.selectedNumber, isChecked: this.selectedCheckbox};
     this.travelItems = Object.assign([], this.travelItems);
     this.itemName = '';

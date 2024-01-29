@@ -1,6 +1,10 @@
 <!--///// Task 3: Make a travel list with their quntity which shows important items first on click of checkbox /////-->
 
 <div class="travel-bg">
+    <video autoplay muted loop id="myVideo">
+        <!-- <source src="https://v4.cdnpk.net/videvo_files/video/free/video0468/large_preview/_import_61654be3823186.13016365.mp4" type="video/mp4"> -->
+        <source src="https://v4.cdnpk.net/videvo_files/video/free/video0457/large_preview/_import_60bc58f3a81557.81704303.mp4">
+      </video>
     <div class="travel">
         <div class="travel_title">
             <div class="title">
@@ -51,22 +55,21 @@
 
                     <div class="listHeight custom_scroll">
                         <ul>
-                            <li *ngFor="let item of travelItems; let i = index"
-                                >
+                            <li *ngFor="let item of travelItems; let i = index">
                                 <div class="list_item" [ngClass]="item.isChecked ? 'bg-change' : 'bg_list'">
                                     <div class="item-name">
-                                        <input type="checkbox" [(ngModel)]="item.isChecked" (change)="onCheckBox(i)">
+                                        <input type="checkbox" class="item_check" [(ngModel)]="item.isChecked" (change)="onCheckBox(i)">
                                         <span>{{ item.name }}</span>
                                     </div>
                                     <span>{{ item.quantity }}</span>
                                 </div>
                                 <div class="quantity">  
                                     <div class="delete">
-                                        <button (click)="editItem(item,i)"><i class="fa fa-pen"
+                                        <button (click)="editItem(item,i)" class="edit"><i class="fa fa-pen"
                                                 aria-hidden="true"></i></button>
                                     </div>                                  
                                     <div class="delete">
-                                        <button (click)="removeItem(i)"><i class="fa fa-trash"
+                                        <button (click)="removeItem(i)" class="deletebtn"><i class="fa fa-trash"
                                                 aria-hidden="true"></i></button>
                                     </div>
 
